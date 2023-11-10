@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Shopping Cart</title>
+</head>
+<body>
+    <h1>Your Shopping Cart</h1>
+    <ul>
+        {% for item in cart_items %}
+            <li>
+                {{ item.product.name }} - Quantity: {{ item.quantity }}
+                <!-- Add a form to update or remove items from the cart -->
+                <form method="post" action="{% url 'update_cart' item.product.id %}">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item.quantity }}">
+                    <button type="submit">Update</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
